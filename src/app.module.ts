@@ -8,6 +8,9 @@ import User from './typeorm/entities/user.entity';
 import { Books } from './typeorm/entities/books.entity';
 import { RolesModule } from './roles/roles.module';
 import { BooksModule } from './books/books.module';
+import { ManagersModule } from './managers/managers.module';
+import Roles from './typeorm/entities/roles.entity';
+import Managers from './typeorm/entities/managers.entity';
 
 @Module({
   imports: [
@@ -18,12 +21,12 @@ import { BooksModule } from './books/books.module';
     username: 'jephthah',
     password: 'jeph3000',
     database: 'voompay',
-    entities: [User, Books],
+    entities: [User, Books, Managers, Roles],
     synchronize: true,
     logging: false,
     migrationsTableName: "migrations",
     migrations: ["src/db/migrations/*.ts"],
-    }), AuthModule, UsersModule, RolesModule, BooksModule,
+    }), AuthModule, UsersModule, RolesModule, BooksModule, ManagersModule,
   ],
     controllers: [AuthController],
     providers: [AuthService]

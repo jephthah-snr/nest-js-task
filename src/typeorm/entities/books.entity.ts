@@ -1,6 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn} from "typeorm";
-import User from "./user.entity";
-
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Generated} from "typeorm";
 
 
 
@@ -9,8 +7,17 @@ export class Books{
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
+    @Column({unique: true})
+    title: string;
+
     @Column()
-    name: string;
+    author: string;
+
+    @Column()
+    managerId: string
+
+    @Generated()
+    booknumber: number;                   
 
     @Column()
     categoryId: string;

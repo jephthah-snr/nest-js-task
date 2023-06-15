@@ -1,0 +1,12 @@
+version: '20.10'
+services:
+  dev-db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 234
+      POSTGRES_DB: NEST
+    networks:
+      - jephthahsnr
+networks:
+  jephthahsnr:

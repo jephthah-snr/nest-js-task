@@ -7,7 +7,7 @@ import AppError from '../../../shared/error';
 import {UNAUTHORIZED, NOT_FOUND} from "httpstatus"
 
 @Injectable()
-export class BooksService {
+export class BookService {
     constructor(private readonly booksrepository: Repository<Books>,
                 private readonly managerRepository: Repository<Managers>){}
     async findById(id: string){

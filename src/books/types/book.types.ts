@@ -1,8 +1,9 @@
 
 
 type bookType = {
-    name: string;
+    title: string;
     author: string;
+    managerID?: string
 }
 
 

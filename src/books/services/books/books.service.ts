@@ -31,6 +31,7 @@ export class BooksService {
     }
 
     async addBook(managerId: string, payload: bookType ){
+        //add transaction for typeorm
         try {
             //check if user is manager
             const isManager = await this.managerRepository.findOne(managerId as any)
@@ -52,6 +53,7 @@ export class BooksService {
     }
 
     async removeBook(id: string, managerId: string){
+        //add trsnsaction here
         try {
             //check if user is manager
             const isManager = await this.managerRepository.findOne(managerId as any)

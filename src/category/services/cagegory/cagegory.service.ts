@@ -24,6 +24,11 @@ export class CagegoryService {
         }
     }
 
+    async findAll(){
+        const all = await this.categoryRepository.find()
+        return all
+    }
+
     async findById(id: string) {
         try {
             const category = await this.categoryRepository.findOneBy({id})

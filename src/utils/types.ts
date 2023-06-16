@@ -6,3 +6,9 @@ export class CreateUserType{
     password: string;
     address: string;
 }
+
+
+export interface User {
+    id: string;
+    username: string;
+  }

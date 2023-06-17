@@ -5,7 +5,6 @@ import { ErrorResponse, SuccessResponse } from '../../../utils/response.util';
 import { Request, Response } from 'express';
 import AppError from '../../../shared/error';
 import { CategoryDto } from '../../type';
-import Category from 'typeorm/entities/category.entity';
 
 
 

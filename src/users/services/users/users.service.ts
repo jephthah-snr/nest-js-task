@@ -28,7 +28,7 @@ export class UsersService {
 
     async createUser(payload: CreateUserType){
         try {
-            await this.userRepository.save(payload)
+            return await this.userRepository.save(payload)
         } catch (error) {
             throw error
         }

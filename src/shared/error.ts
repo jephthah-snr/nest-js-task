@@ -1,22 +1,20 @@
+import { HttpException } from "@nestjs/common";
 
-export default class AppError extends Error {
-    public statusCode: number;
+export default class AppError extends HttpException {
     public isOperational: boolean;
     public cause: Error | undefined;
   
     constructor(
-      statusCode: number,
+    statusCode: number,
       message: string,
       cause?: any,
-      isOperational = true
+      isOperational = true,
     ) {
-      super(message);
-  
-      this.statusCode = statusCode;
-      this.cause = cause as Error;
+      super(message, statusCode);
+      
       this.isOperational = isOperational;
+      this.cause = cause as Error;
   
       Error.captureStackTrace(this, this.constructor);
     }
-  
   }

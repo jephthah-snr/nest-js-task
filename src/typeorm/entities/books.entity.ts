@@ -13,26 +13,11 @@ export class Books{
     @Column()
     author: string;
 
-    @Column()
-    managerId: string
-
     @Generated()
     booknumber: number;                   
 
     @Column()
     categoryId: string;
-
-    @Column({default: true})
-    is_availalbe: boolean
-
-    @Column()
-    currently_with: string
-
-    @Column()
-    last_returned_by: string
-
-    @Column()
-    returned_at: Date
 
     @CreateDateColumn({
         type: "timestamp",

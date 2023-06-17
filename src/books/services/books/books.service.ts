@@ -6,8 +6,7 @@ import Managers from '../../../typeorm/entities/managers.entity';
 import AppError from '../../../shared/error';
 import {UNAUTHORIZED, NOT_FOUND} from "httpstatus"
 import { InjectRepository } from '@nestjs/typeorm';
-import User from '../../../typeorm/entities/user.entity';
-import uuid from "uuid"
+
 
 @Injectable()
 export class BookService {
@@ -47,7 +46,6 @@ export class BookService {
                     title: payload.title
                 },
             })
-
             if(exists) throw new AppError(HttpStatus.UNAUTHORIZED, "book with same title and author already exists")
             const data = await this.booksrepository.save(payload)
             console.log(data)

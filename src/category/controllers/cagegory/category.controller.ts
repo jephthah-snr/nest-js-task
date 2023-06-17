@@ -1,18 +1,19 @@
 import { Controller, Get, Post, Patch, Delete, Req, Res, HttpStatus, Param, Body } from '@nestjs/common';
-import { CategoryService } from '../../services/cagegory/category.service';
 import { Logger } from '@nestjs/common';
 import { ErrorResponse, SuccessResponse } from '../../../utils/response.util';
 import { Request, Response } from 'express';
 import AppError from '../../../shared/error';
-import { CategoryDto } from '../../type';
+import { CategoryService } from '../../../category/services/cagegory/category.service';
 
 
 
-@Controller('cagegory')
-export class CagegoryController {
+@Controller('category')
+export class categoryController {
     constructor(
         private readonly categoryService:CategoryService){}
-    
+
+
+
     @Get()
     async getAllCategories(@Req() req: Request, @Res() res: Response){
         try {
@@ -22,6 +23,8 @@ export class CagegoryController {
 
         } catch (error) {
             Logger.error({error})
+            console.log(error)
+            if(error instanceof AppError) return res.status(error.getStatus()).send(ErrorResponse(error.message));
             return ErrorResponse(error)
         }
     }
@@ -43,13 +46,10 @@ export class CagegoryController {
 
 
     @Post("create/category")
-    async createCategory(@Body() categoryDto: CategoryDto, @Req() req: Request, @Res() res: Response){
+    async createCategory(@Req() req: Request, @Res() res: Response){
         try {
-            const exists = await this.categoryService.findByName(categoryDto.name)
-
-            if(exists) throw new AppError(HttpStatus.UNAUTHORIZED, "category wut this name alrady exists.")
-
-            const response = await this.categoryService.createCategory(categoryDto)
+           
+            const response = await this.categoryService.createCategory(req.body)
 
             return res.status(HttpStatus.OK).send(SuccessResponse("category created", response))
         } catch (error) {
@@ -59,13 +59,13 @@ export class CagegoryController {
     }
 
     @Delete(":id")
-    async deleteCategory(@Param() id, @Req() req: Request, @Res() res: Response){
+    async deleteCategory(@Req() req: Request, @Res() res: Response){
         try {
-            const cagegory = await this.categoryService.findById(id)
+            const category = await this.categoryService.findById(req.params.id)
 
-            if(!cagegory) throw new AppError(HttpStatus.NOT_FOUND, "this category does not exist");
+            if(!category) throw new AppError(HttpStatus.NOT_FOUND, "this category does not exist");
 
-            const response  = await this.categoryService.deleteId(id)
+            const response  = await this.categoryService.deleteId(category.id)
 
             return res.status(HttpStatus.OK).send(SuccessResponse("Category deleted successfully", response))
 

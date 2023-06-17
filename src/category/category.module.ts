@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { CagegoryService } from './services/cagegory/cagegory.service';
-import { CagegoryController } from './controllers/cagegory/cagegory.controller';
+import { CategoryService } from './services/cagegory/category.service';
+import { CagegoryController } from './controllers/cagegory/category.controller';
 import { Repository } from 'typeorm';
 
 @Module({
-  providers: [CagegoryService, Repository],
+  providers: [CategoryService, Repository],
   controllers: [CagegoryController]
 })
 export class CategoryModule {}

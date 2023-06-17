@@ -2,10 +2,10 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import AppError from '../../../shared/error';
 import { Repository } from 'typeorm';
 import Category from '../../../typeorm/entities/category.entity';
-import { CategoryType } from '../../../category/type';
+import { CategoryType } from '../../type';
 
 @Injectable()
-export class CagegoryService {
+export class CategoryService {
     constructor(private readonly categoryRepository: Repository<Category>){}
 
     async findByName(name: string){
@@ -56,7 +56,7 @@ export class CagegoryService {
         }
     }
 
-    async updateId(id: string, updateParam: CategoryType) {
+    async updateById(id: string, updateParam: CategoryType) {
         try {
 
             const exists = await this.categoryRepository.findOneBy({id})
